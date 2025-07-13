@@ -1,3 +1,4 @@
+print("App starting...")
 
 ######################### Project Title: MedTalk – Medical Book RAG Chatbot with AgenticAI  #########################
 
