@@ -83,7 +83,8 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 #from langchain_openai import ChatOpenAI
 from langchain.chat_models import ChatOpenAI
 from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import OpenAIEmbeddings
+#from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain.schema import Document
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
