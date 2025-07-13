@@ -80,7 +80,8 @@ import pandas as pd
 import io
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import ChatOpenAI
+#from langchain_openai import ChatOpenAI
+from langchain.chat_models import ChatOpenAI
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain.schema import Document
