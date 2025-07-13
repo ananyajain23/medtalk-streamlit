@@ -100,20 +100,16 @@ st.session_state.setdefault("vectorstore_built", False)
 st.session_state.setdefault("image_ocr_done", False)
 
 
-# Directories for external tools required for PDF/image processing
-poppler_bin = r"D:\GENAI COURSE LEARNBAY\Capstone Projects\MedTalk - Medical Chatbot\poppler-24.08.0\Library\bin"
-#Keep Poppler if you plan to add PDF-to-image conversion for OCR in the future. Not required as of now.
-#Tools like pdf2image or PyMuPDF use Poppler to convert PDF pages to images (e.g., .png, .jpg) for:
-# aren’t doing this conversion step in your pipeline.
+import os
+import platform
+import pytesseract
 
-tesseract_dir = r"D:\GENAI COURSE LEARNBAY\Capstone Projects\MedTalk - Medical Chatbot\Tesseract-OCR"
-#You need Tesseract because you do OCR on actual images (*.jpg in ./figures).
-
-# Add tool paths to system PATH so they can be called by subprocesses
-os.environ["PATH"] += os.pathsep + poppler_bin + os.pathsep + tesseract_dir
-
-# Point pytesseract to the correct executable
-pytesseract.pytesseract.tesseract_cmd = os.path.join(tesseract_dir, "tesseract.exe")
+# Only set tesseract path if running on Windows
+if platform.system() == "Windows":
+    tesseract_dir = r"D:\GENAI COURSE LEARNBAY\Capstone Projects\MedTalk - Medical Chatbot\Tesseract-OCR"
+    poppler_bin = r"D:\GENAI COURSE LEARNBAY\Capstone Projects\MedTalk - Medical Chatbot\poppler-24.08.0\Library\bin"
+    os.environ["PATH"] += os.pathsep + poppler_bin + os.pathsep + tesseract_dir
+    pytesseract.pytesseract.tesseract_cmd = os.path.join(tesseract_dir, "tesseract.exe")
 
 
 # Create folder to store extracted images if it doesn't exist
