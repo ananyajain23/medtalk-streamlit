@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
+#if it prints tesseract version then it means it successfully installed (See in logs)
 RUN tesseract --version
 
 # Set working directory
@@ -25,9 +26,11 @@ RUN sed -i '/pywin32/d' requirements.txt && \
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+#image created now below this is for starting container from the image
+
 # Expose Streamlit port
 EXPOSE 8501
 
 # Start app (below is command to run app)
-CMD ["streamlit", "run", "MedTalk_Chatbot_withAgenticAI_Streamlit_v5.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD sh -c "streamlit run MedTalk_Chatbot_withAgenticAI_Streamlit_v5.py --server.port=$PORT --server.address=0.0.0.0"
 
